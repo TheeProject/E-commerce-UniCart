@@ -31,6 +31,7 @@ function App() {
     <Router>
       <PageContainer>
         <Header />
+        <h1>Welcome to UniCart</h1>
         <SearchBar />
         <ContentWrapper>
           <Routes>

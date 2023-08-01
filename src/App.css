@@ -16,7 +16,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #DAA520;
+  background-color: rgb(7, 6, 6);
   padding: 20px;
   color: #ffffff;
 }
@@ -44,18 +44,21 @@ header nav ul li:last-child {
 }
 
 .search-bar-container input[type="text"] {
-  width: 100%;
+  width: 50%;
   box-sizing: border-box;
   padding-right: 40px; /* reserve space for the search icon */
+  border-radius: 10px;
+  
 }
 
-.search-bar-container::after {
+.search-bar-container::inside {
   content: "🔍";
   position: absolute;
-  right: 10px;
+  /* right: 10px; */
   top: 50%;
   transform: translateY(-50%);
   font-size: 20px;
+
 }
   
 
@@ -76,3 +79,4 @@ header nav ul li:last-child {
       width: 100%;
   }
 }
+
