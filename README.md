@@ -1,1 +1,1 @@
-# E-commerce-UniCart
+# E-Commerce React Application
