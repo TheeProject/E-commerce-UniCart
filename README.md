@@ -1,1 +1,1 @@
-# Getting Started with Create React App
+# E-Commerce React Application
