@@ -13,7 +13,7 @@ const FooterContainer = styled.footer`
 display: flex;
 justify-content: space-between;
 padding: 10px 20px;
-background-color: #DAA520;  // This is a goldish color
+background-color: orange;  // This is a goldish color
 
 .footer-text {
   color: white;
