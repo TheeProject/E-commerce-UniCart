@@ -9,8 +9,6 @@ import HomePage from './HomePage';
 import AboutPage from './AboutPage';
 import ContactPage from './ContactPage';
 import LoginPage from './LoginPage';
-import SearchBar from './SearchBar';
-import CategoryPage from './CategoryPage';
 
 const PageContainer = styled.div`
   display: flex;
@@ -31,13 +29,10 @@ function App() {
     <Router>
       <PageContainer>
         <Header />
-        <h1>Welcome to UniCart</h1>
-        <SearchBar />
         <ContentWrapper>
           <Routes>
             <Route path="/" element={<HomePage />} />
             {/* <Route path="/products" element={<ProductsPage />} /> */}
-            <Route path="/products/:category" element={<CategoryPage />} /> {/* Updated dynamic route */}
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/login" element={<LoginPage />} />

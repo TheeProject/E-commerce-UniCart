@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useState, useContext } from 'react';
+import UserContext from './UserContext';
 
-function LoginPage() {
+function Login() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const { login } = useContext(UserContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login(username, password);
+  };
+
   return (
-    <div>LoginPage</div>
-  )
+    <div></div>
+    // Add your form fields here
+  );
 }
-
-export default LoginPage
