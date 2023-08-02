@@ -34,34 +34,32 @@ header nav ul li:last-child {
   margin-left: auto;
 }
 
-/* Search bar styles */
-/* Styles for SearchBar component */
 .search-bar-container {
   position: relative;
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  width: 50%;
+  /* margin-top: 10px; */
+  /* margin-bottom: 10px; */
+  margin: 10px auto;
+
 }
 
 .search-bar-container input[type="text"] {
-  width: 50%;
+  width: 100%;
   box-sizing: border-box;
-  padding-right: 40px; /* reserve space for the search icon */
+  padding-right: 30px; /* reserve space for the search icon */
   border-radius: 10px;
   
 }
 
-.search-bar-container::inside {
+.search-bar-container::after {
   content: "🔍";
   position: absolute;
-  /* right: 10px; */
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 20px;
-
+  pointer-events: none;
 }
-  
-
 /* Category container styles */
 .category-container {
   background-color: #29AB87;
