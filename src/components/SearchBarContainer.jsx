@@ -50,7 +50,7 @@ function SearchBarContainer() {
             <h3>Welcome Customer! 👋</h3>
           <p>Register with UniCart to save your cart, save products for later, view order history, & more!</p>
           <input type="text" placeholder="Enter your email to register" />
-          <p>Already a customer? <a href="/signin">Sign In</a></p>
+          <p>Already a customer? <a href="/login">Login</a></p>
           {cartItems.length > 0 ? (
             cartItems.map((item) => (
               <div key={item.id}>

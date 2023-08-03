@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './App.css';
 import App from './components/App';
-import UserProvider from './UserProvider';
+import UserProvider from './Authentication/UserProvider';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
