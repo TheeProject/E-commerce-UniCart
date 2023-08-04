@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaSearch } from 'react-icons/fa';
+import useProducts from './useProducts';
 
 const SearchContainer = styled.div`
   display: flex;
@@ -18,28 +19,51 @@ const SearchInput = styled.input`
   padding: 5px 10px;
   font-size: 16px;
 `;
+
 const SearchButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
 `;
 
+const SearchResult = styled.ul`
+  list-style: none;
+`;
 
-function SearchBar() {
-  const handleSearch = () => {
-    // Perform the search operation here
-  }
+const SearchBar = () => {
+  const products = useProducts();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleSearch = (event) => {
+    const value = event.target.value.toLowerCase();
+    setSearchTerm(value);
+
+    const filteredProducts = products.filter((product) => {
+      return product.name.toLowerCase().includes(value);
+    });
+
+    setSearchResults(filteredProducts);
+  };
 
   return (
     <SearchContainer>
-      <SearchInput type="text" placeholder="Search..." />
-      <SearchButton onClick={handleSearch}>
+      <SearchInput
+        type="text"
+        placeholder="Search..."
+        value={searchTerm}
+        onChange={handleSearch}
+      />
+      <SearchButton>
         <FaSearch />
       </SearchButton>
+      <SearchResult>
+        {searchResults.map((product) => (
+          <li key={product.id}>{product.name}</li>
+        ))}
+      </SearchResult>
     </SearchContainer>
   );
-}
-
-
+};
 
 export default SearchBar;

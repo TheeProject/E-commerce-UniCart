@@ -5,13 +5,12 @@ import styled from 'styled-components';
 import Header from './Header';
 import Footer from './Footer';
 import HomePage from './HomePage';
-// import ProductsPage from './ProductsPage';
 import AboutPage from './AboutPage';
 import ContactPage from './ContactPage';
 import LoginPage from './LoginPage';
-
-
-
+import SearchBar from './SearchBar'; // Import the SearchBar component
+import CheckOutPage from './CheckOutPage';
+import PaymentPage from './PaymentPage';
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -28,17 +27,19 @@ const FooterWrapper = styled.div`
 
 function App() {
   return (
+      
     <Router>
       <PageContainer>
         <Header />
         <ContentWrapper>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            {/* <Route path="/products" element={<ProductsPage />} /> */}
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/login" element={<LoginPage />} />
-            {/* Add more routes as needed */}
+            <Route path="/checkout-details" element={<CheckOutPage />} />
+            <Route path="/payment" element={<PaymentPage />} />
+            <Route path="/" element={<SearchBar />} /> {/* Add the SearchBar component here */}
           </Routes>
         </ContentWrapper>
         <FooterWrapper>
