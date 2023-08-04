@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaSearch } from 'react-icons/fa';
 
@@ -22,17 +22,27 @@ const SearchButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
+  margin-right: 20px;
 `;
 
 
-function SearchBar() {
+function SearchBar({ onSearch }) { // De-structure onSearch prop
+  const [searchInput, setSearchInput] = useState('');
+
   const handleSearch = () => {
-    // Perform the search operation here
+    setSearchInput(SearchInput)
+  }
+
+  const handleInputChange = (event) => {
+    setSearchInput(event.target.value);
   }
 
   return (
     <SearchContainer>
-      <SearchInput type="text" placeholder="Search..." />
+      <SearchInput type="text" placeholder="Search..." 
+      value={searchInput}
+      onChange={handleInputChange}
+       />
       <SearchButton onClick={handleSearch}>
         <FaSearch />
       </SearchButton>

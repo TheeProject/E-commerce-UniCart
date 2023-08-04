@@ -13,7 +13,7 @@ const FooterContainer = styled.footer`
 display: flex;
 justify-content: space-between;
 padding: 10px 20px;
-background-color: orange;  // This is a goldish color
+background-color: black;  // This is a goldish color
 
 .footer-text {
   color: white;
@@ -44,15 +44,16 @@ function Footer() {
     <FooterContainer>
         <div className="contact-info">
             <div>
-                <FaPhone /> Phone: +254798820548
+                 Phone <FaPhone />: +254798820548
             </div>
             <div>
-                <FaEnvelope /> Email: info@unicart.com
+                 Email <FaEnvelope />: info@unicart.com
             </div>
-        <div>Street: Your Street</div>
-        <div>City: Nairobi</div>
-        </div>
+        <div>Street: Kimathi</div>
+        <div>Location: Nairobi</div>
         <div className="footer-text">© {new Date().getFullYear()} UniCart</div>
+        </div>
+
         <div className="social-icons">
             <a 
             href="https://wa.me/yourNumber" 

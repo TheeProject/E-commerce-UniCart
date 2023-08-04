@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import SearchBar from './SearchBar';
+import { CartContext } from '../Authentication/CartContext';
 
 const StyledSearchBarContainer = styled.div`
   display: flex;
@@ -25,8 +26,8 @@ const CartDrawer = styled.div`
   right: 0;
   top: 100%;
   width: 300px; 
-  height: 400px;
-  background: white;
+  height: auto;
+  background: lightgreen;
   padding: 20px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -34,29 +35,33 @@ const CartDrawer = styled.div`
 
 function SearchBarContainer() {
   const [isOpen, setIsOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]); // Replace this with your actual state management
-
+  const { cart } = useContext(CartContext); // use cart instead of cartItems
+  const totalAmount = cart.reduce((total, item) => total + item.unit_price, 0);
   return (
     <StyledSearchBarContainer>
       <SearchBar />
 
       <Cart onClick={() => setIsOpen(!isOpen)}>
         <FontAwesomeIcon icon={faShoppingCart} />
-        <span>{cartItems.length}</span>
+        <span>{cart.length}</span>
       </Cart>
 
       {isOpen && (
         <CartDrawer>
-            <h3>Welcome Customer! 👋</h3>
-          <p>Register with UniCart to save your cart, save products for later, view order history, & more!</p>
-          <input type="text" placeholder="Enter your email to register" />
+          <h2>Welcome Customer! 👋</h2>
+          <h5>Sign in with UniCart to save your cart, save products for checkout and more!</h5>
           <p>Already a customer? <a href="/login">Login</a></p>
-          {cartItems.length > 0 ? (
-            cartItems.map((item) => (
-              <div key={item.id}>
-                <p>{item.name} - ${item.price}</p>
+          {cart.length > 0 ? (
+            <div>
+              {cart.map((item) => (
+                <div key={item.index}>
+                  <p>{item.product_name} - ${item.unit_price}</p>
+                </div>
+              ))}
+              <div>
+                <h4>Total: ${totalAmount}</h4>
               </div>
-            ))
+            </div>
           ) : (
             <h2>Cart Is Empty</h2>
           )}
