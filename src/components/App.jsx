@@ -5,12 +5,12 @@ import styled from 'styled-components';
 import Header from './Header';
 import Footer from './Footer';
 import HomePage from './HomePage';
-// import ProductsPage from './ProductsPage';
 import AboutPage from './AboutPage';
-import ContactPage from './ContactPage';
+// import ContactPage from './ContactPage';
 import LoginPage from './LoginPage';
 import ProductDetails from './ProductDetails';
-
+import CheckOutPage from './CheckOutPage';
+import PaymentPage from './PaymentPage';
 
 
 const PageContainer = styled.div`
@@ -29,6 +29,7 @@ const FooterWrapper = styled.div`
 
 function App() {
   return (
+      
     <Router>
       <PageContainer>
         <Header />
@@ -37,9 +38,10 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route exact path="/products/:product_name" element={<ProductDetails />} />
             <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
+            {/* <Route path="/contact" element={<ContactPage />} /> */}
             <Route path="/login" element={<LoginPage />} />
-            {/* Add more routes as needed */}
+            <Route path="/checkout-details" element={<CheckOutPage />} />
+            <Route path="/payment" element={<PaymentPage />} />
           </Routes>
         </ContentWrapper>
         <FooterWrapper>

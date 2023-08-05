@@ -77,7 +77,7 @@ function Header() {
   return (
     <StyledHeader>
       <div className="logo">
-      <FontAwesomeIcon icon={faShoppingCart} size="2x" />
+      <FontAwesomeIcon icon={faShoppingCart} size="3x" />
         <h1><strong>UniCart</strong></h1>
       </div>
 

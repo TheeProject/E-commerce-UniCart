@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import SearchBar from './SearchBar';
 import { CartContext } from '../Authentication/CartContext';
+import { Link } from 'react-router-dom';
 
 const StyledSearchBarContainer = styled.div`
   display: flex;
@@ -25,11 +26,13 @@ const CartDrawer = styled.div`
   position: absolute;
   right: 0;
   top: 100%;
+
   width: 300px; 
   height: auto;
   background: lightgreen;
+
   padding: 20px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 `;
 
@@ -63,8 +66,14 @@ function SearchBarContainer() {
               </div>
             </div>
           ) : (
+            
             <h2>Cart Is Empty</h2>
           )}
+
+          {/* Link to the CheckoutPage */}
+          <Link to="/checkout-details">
+            <button>Proceed to Checkout</button>
+          </Link>
         </CartDrawer>
       )}
     </StyledSearchBarContainer>
