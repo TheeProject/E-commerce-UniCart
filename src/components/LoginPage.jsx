@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import UserContext from '../Authentication/UserContext';
+import { UserContext } from '../Authentication/UserContext';
 import styled from 'styled-components';
 
 const Form = styled.form`
@@ -35,6 +35,8 @@ function LoginPage() {
   const [isRegistering, setIsRegistering] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const { login, register } = useContext(UserContext);
@@ -43,10 +45,10 @@ function LoginPage() {
     e.preventDefault();
     if (isRegistering) {
       // Handle registration
-      register(firstName, lastName, password);
+      register(firstName, lastName, email, username, password); 
     } else {
       // Handle login
-      login(firstName, lastName, password); // Use firstName and lastName as the username
+      login(username, password); // Use username and password to login
     }
   };
 
@@ -67,8 +69,20 @@ function LoginPage() {
             value={lastName} 
             onChange={e => setLastName(e.target.value)} 
           />
+          <Input 
+            type="email" 
+            placeholder="Email" 
+            value={email} 
+            onChange={e => setEmail(e.target.value)} 
+          />
         </>
       )}
+       <Input 
+        type="text" // Change from email to text
+        placeholder="Username" // Change placeholder
+        value={username} // Change value
+        onChange={e => setUsername(e.target.value)} // Change handler
+      />
       <Input 
         type="password" 
         placeholder="Password" 
