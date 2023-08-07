@@ -13,6 +13,8 @@ import PaymentPage from "./PaymentPage";
 import SearchBarContainer from "./SearchBarContainer"
 import CheckoutPage from "./CheckoutPage";
 
+
+
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
