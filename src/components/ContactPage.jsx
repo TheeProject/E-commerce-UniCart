@@ -134,7 +134,7 @@ function ContactPage() {
         <a href="https://instagram.com/yourProfile" target="_blank" rel="noopener noreferrer">
           <FaInstagram className="social-icon" />
         </a>
-        {/* Add other social media icons/links here */}
+       
       </div>
     </div>
   );
