@@ -82,14 +82,14 @@ const CartDrawer = styled.div`
   z-index: 1;
 `;
 
-function SearchBarContainer() {
+function SearchBarContainer({ onSearch }) {
   const [isOpen, setIsOpen] = useState(false);
   const { state } = useContext(CartContext); // access state object from CartContext
   const { cart } = state; // destructure cart from state
   const totalAmount = cart.reduce((total, item) => total + item.unit_price, 0);
   return (
     <StyledSearchBarContainer>
-      <SearchBar />
+      <SearchBar onSearch={onSearch} />
 
       <Cart onClick={() => setIsOpen(!isOpen)}>
         <FontAwesomeIcon icon={faShoppingCart} />

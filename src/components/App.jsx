@@ -8,10 +8,13 @@ import HomePage from "./HomePage";
 import AboutPage from "./AboutPage";
 import LoginPage from "./LoginPage";
 import ProductDetails from "./ProductDetails";
-// import { CheckoutProvider, CheckoutPage } from "../Authentication/CheckoutProvider";
 import PaymentPage from "./PaymentPage";
 import SearchBarContainer from "./SearchBarContainer"
 import CheckoutPage from "./CheckoutPage";
+import ContactPage from "./ContactPage";
+
+
+
 
 const PageContainer = styled.div`
   display: flex;
@@ -30,7 +33,7 @@ const FooterWrapper = styled.div`
 function App() {
   return (
     <Router>
-      {/* <CheckoutProvider> */}
+     
         <PageContainer>
           <Header />
           <ContentWrapper>
@@ -42,13 +45,14 @@ function App() {
               <Route path="/checkout-details" element={<CheckoutPage />} />
               <Route path="/payment" element={<PaymentPage />} />
               <Route path="/cart" element={<SearchBarContainer/>} />
+              <Route path="/contact" element={<ContactPage/>} />
             </Routes>
           </ContentWrapper>
           <FooterWrapper>
             <Footer />
           </FooterWrapper>
         </PageContainer>
-      {/* </CheckoutProvider> */}
+      
     </Router>
   );
 }
