@@ -4,6 +4,8 @@ import { faCcPaypal, faCcMastercard } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import { useCart } from '../Authentication/CartContext'
+import { faIconName } from '@fortawesome/free-brands-svg-icons';
+
 
 const ProductCard = styled.div`
   display: flex;
