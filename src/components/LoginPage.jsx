@@ -35,6 +35,7 @@ function LoginPage() {
   const [isRegistering, setIsRegistering] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -44,10 +45,10 @@ function LoginPage() {
     e.preventDefault();
     if (isRegistering) {
       // Handle registration
-      register(firstName, lastName, email, password);
+      register(firstName, lastName, email, username, password); 
     } else {
       // Handle login
-      login(email, password); // Use useremail and password to login
+      login(username, password); // Use username and password to login
     }
   };
 
@@ -68,13 +69,19 @@ function LoginPage() {
             value={lastName} 
             onChange={e => setLastName(e.target.value)} 
           />
+          <Input 
+            type="email" 
+            placeholder="Email" 
+            value={email} 
+            onChange={e => setEmail(e.target.value)} 
+          />
         </>
       )}
-      <Input 
-        type="email" 
-        placeholder="Email" 
-        value={email} 
-        onChange={e => setEmail(e.target.value)} 
+       <Input 
+        type="text" // Change from email to text
+        placeholder="Username" // Change placeholder
+        value={username} // Change value
+        onChange={e => setUsername(e.target.value)} // Change handler
       />
       <Input 
         type="password" 
