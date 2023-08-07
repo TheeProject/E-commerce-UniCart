@@ -13,6 +13,8 @@ import ProductDetails from './ProductDetails';
 
 
 
+
+
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
