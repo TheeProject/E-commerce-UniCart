@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { UserContext } from '../Authentication/UserContext';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const Form = styled.form`
   display: flex;
@@ -40,17 +41,28 @@ function LoginPage() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const { login, register } = useContext(UserContext);
+  const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isRegistering) {
       // Handle registration
-      register(firstName, lastName, email, username, password); 
+      await register(firstName, lastName, email, username, password); 
+      // Clear the fields after registration
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setUsername('');
+      setPassword('');
+      setConfirmPassword('');
     } else {
       // Handle login
-      login(username, password); // Use username and password to login
+      await login(username, password); // Use username and password to login
+      // Redirect to home page after successful login
+      navigate('/');
     }
   };
+
 
   return (
     <Form onSubmit={handleSubmit}>

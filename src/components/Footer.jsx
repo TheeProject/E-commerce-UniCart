@@ -7,6 +7,7 @@ import {
   FaInstagram,
   FaPhone,
   FaEnvelope,
+  FaMap,
 } from "react-icons/fa";
 
 const FooterContainer = styled.footer`
@@ -26,12 +27,12 @@ const FooterContainer = styled.footer`
   }
 
   .contact-info {
-    color: orange;
+    color: white;
     margin-top: 30px;
   }
 
   .footer-text {
-    color: orange;
+    color: white;
   }
 
   .social-icons,
@@ -43,6 +44,7 @@ const FooterContainer = styled.footer`
   .social-icon {
     color: white;
     font-size: 20px;
+    justify-content: space-between, 10px;
   }
 
   .top-brands,
@@ -141,13 +143,13 @@ function Footer() {
     <FooterContainer>
       <div className="contact-info">
         <div>
-          <FaPhone /> Phone: +254798820548
+        Phone <FaPhone />: +254798820548
         </div>
         <div>
-          <FaEnvelope /> Email: <a href="mailto:info@unicart.com">info@unicart.com</a>
+        Email <FaEnvelope />: <a href="mailto:info@unicart.com">info@unicart.com</a>
         </div>
         <div>Street: Kimathi</div>
-        <div>Location: Nairobi</div>
+        <div>Location <FaMap />: Nairobi</div>
         <div className="footer-text">© {new Date().getFullYear()} UniCart</div>
       </div>
 
