@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { faCcPaypal, faCcMastercard } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
-import { CartContext } from '../Authentication/CartContext'
+import { CartContext } from '../Authentication/CartContext';
 
 
 
@@ -134,6 +134,7 @@ function CheckoutPage() {
    alert("Payment processed!");
  };
   return (
+    
     <Container>
       <MainContent>
         <div style={{ padding: "20px", display: "block" }}>
@@ -221,6 +222,7 @@ function CheckoutPage() {
               />
             </label>
           </div>
+        
           <h1>Payment Method</h1>
           <p>Selected Payment Mode: {paymentMode}</p>
           <PaymentMethods>
@@ -235,7 +237,7 @@ function CheckoutPage() {
             Proceed to Payment
           </button>
         </div>
-      </MainContent>
+        </MainContent>
       <OrderContainer>
         <OrderSummary>
           <h2>Order Summary</h2>
@@ -260,7 +262,8 @@ function CheckoutPage() {
           ))}
         </BagSummary>
       </OrderContainer>
-    </Container>
+      </Container>
   );
 }
+
 export default CheckoutPage;

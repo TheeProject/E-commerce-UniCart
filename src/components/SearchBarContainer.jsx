@@ -5,6 +5,7 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import SearchBar from './SearchBar';
 import { CartContext } from '../Authentication/CartContext';
 import { Link, useNavigate } from 'react-router-dom';
+// import CheckoutPage from './CheckoutPage';
 
 
 const ProductCard = styled.div`
@@ -103,6 +104,7 @@ function SearchBarContainer({ onSearch }) {
   return (
     <StyledSearchBarContainer>
       <SearchBar onSearch={onSearch} />
+      {/* <CheckoutPage /> */}
 
       <Cart onClick={() => setIsOpen(!isOpen)}>
         <FontAwesomeIcon icon={faShoppingCart} />
