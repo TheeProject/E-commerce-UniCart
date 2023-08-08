@@ -7,10 +7,10 @@ UniCart is a modern e-commerce platform designed to provide an efficient and use
 
 - **Product Browsing**: Explore a wide variety of products with detailed information.
 - **Secure Checkout**: Multiple payment options including Paypal, MasterCard, and Mpesa.
-- **Cart Management**: Add products to your cart, view order summary, and manage your shopping bag.
+- **Cart Management**: Add products to your cart, view the order summary, and manage your shopping bag.
 - **User Authentication**: Log in or create an account for personalized shopping.
 
-## Delverables
+## Deliverables
 
 1. A user should be able to view a list of products upon landing on the platform i.e. without signing in.
 2. A user should be able to click on a product and view more details pertaining to that product they’ve clicked.
@@ -18,7 +18,7 @@ UniCart is a modern e-commerce platform designed to provide an efficient and use
 4. A user should be able to log in to the platform with the credentials that were used to register to the platform as a customer.
 5. A user should be able to add/ remove a product of choice to the cart.
 6. A user should be able to view the number of items added to the cart. 
-7. A user should be able to perform checkout i.e. by adding an address for delivery purposes, simulate a payment process and generate an order receipt for the goods purchases
+7. A user should be able to perform checkout i.e. by adding an address for delivery purposes, simulating a payment process and generating an order receipt for the goods purchases
 
 
 
