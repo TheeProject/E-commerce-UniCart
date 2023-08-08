@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import SearchBar from './SearchBar';
 import { CartContext } from '../Authentication/CartContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+// import CheckoutPage from './CheckoutPage';
 
 
 const ProductCard = styled.div`
@@ -82,14 +83,28 @@ const CartDrawer = styled.div`
   z-index: 1;
 `;
 
-function SearchBarContainer() {
+function SearchBarContainer({ onSearch }) {
   const [isOpen, setIsOpen] = useState(false);
   const { state } = useContext(CartContext); // access state object from CartContext
   const { cart } = state; // destructure cart from state
   const totalAmount = cart.reduce((total, item) => total + item.unit_price, 0);
+  const navigate = useNavigate(); // Import useHistory from react-router-dom
+
+  const handleProceedToCheckout = () => {
+   navigate({
+      pathname: "/checkout-details",
+      state: {
+        cartItems: cart,
+        totalAmount: totalAmount,
+      },
+    });
+  };
+
+
   return (
     <StyledSearchBarContainer>
-      <SearchBar />
+      <SearchBar onSearch={onSearch} />
+      {/* <CheckoutPage /> */}
 
       <Cart onClick={() => setIsOpen(!isOpen)}>
         <FontAwesomeIcon icon={faShoppingCart} />
@@ -120,7 +135,9 @@ function SearchBarContainer() {
 
           {/* Link to the CheckoutPage */}
           <Link to="/checkout-details">
-            <button>Proceed to Checkout</button>
+          <button onClick={handleProceedToCheckout} disabled={cart.length === 0}>
+            Proceed to Checkout
+          </button>
           </Link>
         </CartDrawer>
       )}
