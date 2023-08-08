@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import SearchBar from "./SearchBar";
+// import SearchBar from "./SearchBar";
 import SearchBarContainer from "./SearchBarContainer";
 import { CartContext } from "../Authentication/CartContext";
 
@@ -69,7 +69,7 @@ const ProductsContainer = styled.div`
 
 function HomePage() {
   const [products, setProducts] = useState(null);
-  const { addToCart, removeFromCart } = useContext(CartContext); // destructure the needed functions
+  const { addToCart, removeFromCart, cart } = useContext(CartContext); // destructure the needed functions
   const [searchTerm, setSearchTerm] = useState("");
   useEffect(() => {
     const fetchData = async () => {
@@ -88,9 +88,7 @@ function HomePage() {
     fetchData();
   }, []);
 
-  const handleSearch = (term) => {
-    setSearchTerm(term);
-  };
+
   // A function that filters products via names
   const filteredProducts =
     products &&
@@ -98,16 +96,20 @@ function HomePage() {
       product.product_name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+    const handleSearch = (term) => {
+      setSearchTerm(term);
+    };
+
   return (
     <div>
-      <SearchBarContainer>
-        <SearchBar onSearch={handleSearch} />
-      </SearchBarContainer>
+        <SearchBarContainer onSearch={handleSearch} />
+      
       <ProductsContainer>
         {searchTerm !== ""
           ? filteredProducts &&
             filteredProducts.map((product, index) => {
-              console.log(product);
+              // console.log(product);
+              const isProductInCart = cart.some((item) => item.index === product.index);
               return (
                 <ProductCard key={index}>
                   <img
@@ -118,9 +120,9 @@ function HomePage() {
                   <p>${product.unit_price}</p>
                   <div>
                     <button onClick={() => removeFromCart(product.index)}>
-                      -
+                    {isProductInCart ? "-" : "Add to Cart"}
                     </button>
-                    <span>Add to Cart</span>
+                    <span>{isProductInCart ? "In Cart" : "Not in Cart"}</span>
                     <button onClick={() => addToCart(product)}>+</button>
                   </div>
                   <DescriptionButton to={`/products/${index}`}>
