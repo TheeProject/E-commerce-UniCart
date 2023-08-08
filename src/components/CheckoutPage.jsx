@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { faCcPaypal, faCcMastercard } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
-import { useCart } from '../Authentication/CartContext'
+import { CartContext } from '../Authentication/CartContext';
+
+
 
 const ProductCard = styled.div`
   display: flex;
@@ -56,7 +58,8 @@ const Container = styled.div`
 `;
 
 const MainContent = styled.div`
-  flex: 2;
+  flex: 1;
+  background-color: #f2f2f2
 `;
 
 const OrderContainer = styled.div`
@@ -78,13 +81,10 @@ const PaymentMethods = styled.div`
 const PaymentMethodLabel = styled.label`
   display: block;
   cursor: pointer;
-  /* Additional styles if needed */
+  background-color: orange;
 `;
 
 function CheckoutPage() {
-  // const { state } = useContext(CartContext); // Use the same context as in SearchBarContainer
-  const { cart, setCart } = useCart();
-  const totalAmount = cart.reduce((total, item) => total + item.unit_price * item.quantity, 0);
   // State for customer details
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -94,10 +94,20 @@ function CheckoutPage() {
   const [county, setCounty] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
-
  // State for payment mode
  const [paymentMode, setPaymentMode] = useState("Mpesa");
+ const { cart, setCart } = useContext(CartContext);
+ const [totalAmount, setTotalAmount] = useState(0);
 
+ // Function to calculate the total amount
+ useEffect(() => {
+  const calculateTotalAmount = () => {
+    const total = cart.reduce((total, item) => total + item.unit_price * item.quantity, 0);
+    setTotalAmount(total);
+  };
+
+  calculateTotalAmount();
+}, [cart]);
  // Function to remove an item from the cart
  const removeFromCart = (index) => {
   const newCart = cart.filter((_, idx) => idx !== index);
@@ -124,6 +134,7 @@ function CheckoutPage() {
    alert("Payment processed!");
  };
   return (
+    
     <Container>
       <MainContent>
         <div style={{ padding: "20px", display: "block" }}>
@@ -137,6 +148,7 @@ function CheckoutPage() {
             </p>
           </div>
           <div style={{ display: "block" }}>
+            <h1>Personal Details</h1>
             <label>
               {/* First Name:{" "} */}
               <input
@@ -210,6 +222,7 @@ function CheckoutPage() {
               />
             </label>
           </div>
+        
           <h1>Payment Method</h1>
           <p>Selected Payment Mode: {paymentMode}</p>
           <PaymentMethods>
@@ -224,7 +237,7 @@ function CheckoutPage() {
             Proceed to Payment
           </button>
         </div>
-      </MainContent>
+        </MainContent>
       <OrderContainer>
         <OrderSummary>
           <h2>Order Summary</h2>
@@ -237,7 +250,7 @@ function CheckoutPage() {
             <ProductCard key={item.index}>
               <img src={item.product_full_image} alt={item.name} />
               <p>
-                {item.product_name}: ${item.unit_price.toFixed(2)}
+                {item.product_name}: ${item.unit_price.toFixed(2)}  x {item.quantity} = ${(item.unit_price * item.quantity).toFixed(2)}
               </p>
               <button onClick={() => removeFromCart(index)}>
                 Remove
@@ -249,7 +262,8 @@ function CheckoutPage() {
           ))}
         </BagSummary>
       </OrderContainer>
-    </Container>
+      </Container>
   );
 }
+
 export default CheckoutPage;

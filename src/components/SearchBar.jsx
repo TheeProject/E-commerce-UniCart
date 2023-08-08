@@ -26,23 +26,25 @@ const SearchButton = styled.button`
 `;
 
 
-function SearchBar({ onSearch }) { // De-structure onSearch prop
+function SearchBar({ onSearch }) {
   const [searchInput, setSearchInput] = useState('');
-
-  const handleSearch = () => {
-    setSearchInput(SearchInput)
-  }
 
   const handleInputChange = (event) => {
     setSearchInput(event.target.value);
   }
 
+  const handleSearch = () => {
+    onSearch(searchInput);
+  }
+
   return (
     <SearchContainer>
-      <SearchInput type="text" placeholder="Search..." 
-      value={searchInput}
-      onChange={handleInputChange}
-       />
+      <SearchInput
+        type="text"
+        placeholder="Search..."
+        value={searchInput}
+        onChange={handleInputChange}
+      />
       <SearchButton onClick={handleSearch}>
         <FaSearch />
       </SearchButton>
