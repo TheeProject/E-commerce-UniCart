@@ -121,11 +121,11 @@ function SearchBarContainer({ onSearch }) {
               {cart.map((item) => (
                 <ProductCard key={item.index}>
                   <img src={item.product_full_image} alt={item.product_name} />
-                  <p>{item.product_name} - ${item.unit_price}</p>
+                  <p>{item.product_name} - Ksh.{item.unit_price}</p>
                 </ProductCard>
               ))}
               <div>
-                <h4>Total: ${totalAmount}</h4>
+                <h4>Total: Ksh.{totalAmount}</h4>
               </div>
             </div>
           ) : (

@@ -117,7 +117,7 @@ function HomePage() {
                     alt={product.product_name}
                   />
                   <h2>{product.product_name}</h2>
-                  <p>${product.unit_price}</p>
+                  <p>Ksh{product.unit_price}</p>
                   <div>
                     <button onClick={() => removeFromCart(product.index)}>
                     {isProductInCart ? "-" : "Add to Cart"}
@@ -141,7 +141,7 @@ function HomePage() {
                     alt={product.product_name}
                   />
                   <h2>{product.product_name}</h2>
-                  <p>${product.unit_price}</p>
+                  <p>Ksh.{product.unit_price}</p>
                   <div>
                     <button onClick={() => removeFromCart(product.index)}>
                       -

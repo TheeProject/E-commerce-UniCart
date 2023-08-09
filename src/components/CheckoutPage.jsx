@@ -138,10 +138,6 @@ function CheckoutPage() {
     <Container>
       <MainContent>
         <div style={{ padding: "20px", display: "block" }}>
-          <h1>
-            <strong>Checkout</strong>
-          </h1>
-
           <div>
             <p>
               Have an account? <Link to="/login">Login</Link>
@@ -242,7 +238,7 @@ function CheckoutPage() {
         <OrderSummary>
           <h2>Order Summary</h2>
           <p>No. of Items to be Shipped: {cart.length}</p>
-          <p>Total Amount to be Paid: ${totalAmount.toFixed(2)}</p>
+          <p>Total Amount to be Paid: Ksh.{totalAmount.toFixed(2)}</p>
         </OrderSummary>
         <BagSummary>
           <h2>Bag Summary</h2>
@@ -250,13 +246,13 @@ function CheckoutPage() {
             <ProductCard key={item.index}>
               <img src={item.product_full_image} alt={item.name} />
               <p>
-                {item.product_name}: ${item.unit_price.toFixed(2)}  x {item.quantity} = ${(item.unit_price * item.quantity).toFixed(2)}
+                {item.product_name}: Ksh.{item.unit_price.toFixed(2)}  x {item.quantity} = ${(item.unit_price * item.quantity).toFixed(2)}
               </p>
               <button onClick={() => removeFromCart(index)}>
                 Remove
               </button>
               <div>
-                <h4>Total: ${totalAmount}</h4>
+                <h4>Total: Ksh{totalAmount}</h4>
               </div>
             </ProductCard>
           ))}
