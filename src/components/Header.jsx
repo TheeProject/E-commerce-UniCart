@@ -183,7 +183,7 @@ function Header() {
         </Nav>
         )}
           <div>
-        {user.isLoggedIn ? (
+        {user && user.isLoggedIn ? (
           <UserAvatar>
             <AvatarIcon icon={faUserCircle} />
             <AvatarText onClick={handleDropdownToggle}>{user.username}</AvatarText>
