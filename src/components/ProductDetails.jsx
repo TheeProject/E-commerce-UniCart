@@ -1,29 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { ProductsContext } from '../Authentication/ProductsContext'; // Import the ProductsContext
 
 function ProductDetails() {
-  const [product, setProduct] = useState(null);
-  let { product_name } = useParams();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`http://ecommerce.muersolutions.com/api/v1/products`);
-      const products = await response.json();
-      const product = products.find(p => p.product_name === decodeURIComponent(product_name));
-
-      setProduct(product);
-    };
-
-    fetchData();
-  }, [product_name]);
-
-  const starRating = () => {
-    let stars = [];
-    for (let i = 0; i < product.ranking; i++) {
-      stars.push(<span key={i} style={{color: '#FFA500'}}>&#9733;</span>);
-    }
-    return stars;
-  };
+  const { product, starRating } = useContext(ProductsContext); // Consume the context
 
   return product ? (
     <div>

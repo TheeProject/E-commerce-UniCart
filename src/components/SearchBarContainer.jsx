@@ -85,17 +85,17 @@ const CartDrawer = styled.div`
 
 function SearchBarContainer({ onSearch }) {
   const [isOpen, setIsOpen] = useState(false);
-  const { state } = useContext(CartContext); // access state object from CartContext
-  const { cart } = state; // destructure cart from state
-  const totalAmount = cart.reduce((total, item) => total + item.unit_price, 0);
-  const navigate = useNavigate(); // Import useHistory from react-router-dom
+  const { cartProducts, total } = useContext(CartContext); // Access cartProducts and total from CartContext
+  const navigate = useNavigate();
+
+
 
   const handleProceedToCheckout = () => {
    navigate({
       pathname: "/checkout-details",
       state: {
-        cartItems: cart,
-        totalAmount: totalAmount,
+        cartItems: cartProducts,
+        totalAmount: total,
       },
     });
   };
@@ -108,7 +108,7 @@ function SearchBarContainer({ onSearch }) {
 
       <Cart onClick={() => setIsOpen(!isOpen)}>
         <FontAwesomeIcon icon={faShoppingCart} />
-        <span>{cart.length}</span>
+        <span>{cartProducts.length}</span>
       </Cart>
 
       {isOpen && (
@@ -116,16 +116,16 @@ function SearchBarContainer({ onSearch }) {
           <h2>Welcome Customer! 👋</h2>
           <h5>Sign in with UniCart to save your cart, save products for checkout and more!</h5>
           <p>Already a customer? <a href="/login">Login</a></p>
-          {cart.length > 0 ? (
+          {cartProducts.length > 0 ? (
             <div>
-              {cart.map((item) => (
+              {cartProducts.map((item) => (
                 <ProductCard key={item.index}>
                   <img src={item.product_full_image} alt={item.product_name} />
                   <p>{item.product_name} - Ksh.{item.unit_price}</p>
                 </ProductCard>
               ))}
               <div>
-                <h4>Total: Ksh.{totalAmount}</h4>
+                <h4>Total: Ksh.{total}</h4>
               </div>
             </div>
           ) : (
@@ -135,7 +135,7 @@ function SearchBarContainer({ onSearch }) {
 
           {/* Link to the CheckoutPage */}
           <Link to="/checkout-details">
-          <button onClick={handleProceedToCheckout} disabled={cart.length === 0}>
+          <button onClick={handleProceedToCheckout} disabled={cartProducts.length === 0}>
             Proceed to Checkout
           </button>
           </Link>

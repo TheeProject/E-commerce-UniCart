@@ -69,7 +69,7 @@ const ProductsContainer = styled.div`
 
 function HomePage() {
   const [products, setProducts] = useState(null);
-  const { addToCart, removeFromCart, cart } = useContext(CartContext); // destructure the needed functions
+  const { addToCart, removeFromCart, cartProducts } = useContext(CartContext); // destructure the needed functions
   const [searchTerm, setSearchTerm] = useState("");
   useEffect(() => {
     const fetchData = async () => {
@@ -109,7 +109,7 @@ function HomePage() {
           ? filteredProducts &&
             filteredProducts.map((product, index) => {
               // console.log(product);
-              const isProductInCart = cart.some((item) => item.index === product.index);
+              const isProductInCart = cartProducts.some((item) => item.index === product.index);
               return (
                 <ProductCard key={index}>
                   <img

@@ -1,69 +1,53 @@
-import React, { createContext, useReducer, useState, useContext } from 'react';
+import React, { createContext, useState } from 'react';
 
-// Actions
-const ADD_TO_CART = 'ADD_TO_CART';
-const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
-const UPDATE_TOTAL = 'UPDATE_TOTAL';
-const UPDATE_STATUS = 'UPDATE_STATUS';
-
-// Reducer
-const reducer = (state, action) => {
-  switch(action.type) {
-    case ADD_TO_CART:
-      return { ...state, cart: [...state.cart, action.payload] };
-    case REMOVE_FROM_CART:
-      return { ...state, cart: state.cart.filter(item => item.id !== action.payload) };
-    case UPDATE_TOTAL:
-      return { ...state, total: action.payload };
-    case UPDATE_STATUS:
-      return { ...state, status: action.payload };
-    default:
-      return state;
-  }
-};
-
-// Create Context
 export const CartContext = createContext();
-export const useCart = () => {
-  const context = useContext(CartContext);
-  if (context === undefined) {
-    throw new Error('useCart must be used within a CartProvider');
-  }
-  return context;
-};
 
-// Provider Component
-const CartProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, {
-    cart: [],
-    total: 0,
-    status: "Order Assigned" // Default status
-  });
-  const [cart, setCart] = useState([]); // Initialize with an empty cart or load from local storage
+export const CartProvider = ({ children }) => {
+  const [cartProducts, setCartProducts] = useState([]);
+  const [total, setTotal] = useState(0);
 
+  // Function to add an item to the cart
   const addToCart = (item) => {
-    dispatch({ type: ADD_TO_CART, payload: item });
-  };
-
-  const removeFromCart = (itemId) => {
-    dispatch({ type: REMOVE_FROM_CART, payload: itemId });
-  };
-
+    const existingItemIndex = cartProducts.findIndex((cartItem) => cartItem.index === item.index); // Assuming each item has a unique id
   
-  // Additional actions to update total and status if needed
-  const updateTotal = (total) => {
-    dispatch({ type: UPDATE_TOTAL, payload: total });
+    if (existingItemIndex !== -1) {
+      // If the item is already in the cart, update the quantity
+      const updatedCart = [...cartProducts];
+      updatedCart[existingItemIndex].quantity += 1;
+      setCartProducts(updatedCart);
+    } else {
+      // If the item is not in the cart, add it
+      setCartProducts([...cartProducts, { ...item, quantity: 1 }]);
+    }
+  
+    // Calculate the total based on the current state of the cart
+    const newTotal = cartProducts.reduce((acc, product) => acc + product.unit_price * product.quantity, 0);
+    setTotal(newTotal + item.unit_price); // Add the price of the newly added item
   };
 
-  const updateStatus = (status) => {
-    dispatch({ type: UPDATE_STATUS, payload: status });
+  // Function to remove an item from the cart
+  const removeFromCart = (index) => {
+    const existingItem = cartProducts.find((cartItem) => cartItem.index === index);
+  
+    if (existingItem) {
+      if (existingItem.quantity > 1) {
+        const updatedCart = cartProducts.map((cartItem) =>
+          cartItem.index === index
+            ? { ...cartItem, quantity: cartItem.quantity - 1 }
+            : cartItem
+        );
+        setCartProducts(updatedCart);
+      } else {
+        const updatedCart = cartProducts.filter((cartItem) => cartItem.index !== index);
+        setCartProducts(updatedCart);
+      }
+      setTotal(total - existingItem.unit_price);
+    }
   };
 
   return (
-    <CartContext.Provider value={{ state, addToCart, removeFromCart, updateTotal, updateStatus, setCart, cart}}>
+    <CartContext.Provider value={{ cartProducts, addToCart, removeFromCart, total }}>
       {children}
     </CartContext.Provider>
   );
 };
-
-export { CartProvider };

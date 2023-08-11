@@ -1,55 +1,54 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { faCcPaypal, faCcMastercard } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
-import { CartContext } from '../Authentication/CartContext';
+import { CartContext } from "../Authentication/CartContext";
+// import { OrderContext } from "../Authentication/OrderContext";
 
+// const ProductCard = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   align-items: center;
+//   width: 50%; /* Full width on mobile */
+//   max-width: 200px;
+//   height: auto;
+//   margin: 15px;
+//   padding: 15px;
+//   border: 1px solid #333;
+//   border-radius: 10px;
 
+//   @media (min-width: 768px) {
+//     /* Adjust to larger size on bigger screens */
+//     width: 200px;
+//   }
 
-const ProductCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 50%; /* Full width on mobile */
-  max-width: 200px;
-  height: auto;
-  margin: 15px;
-  padding: 15px;
-  border: 1px solid #333;
-  border-radius: 10px;
+//   img {
+//     max-width: 100%;
+//     max-height: 100px; /* Limit image height */
+//     height: auto;
+//     object-fit: contain; /* Ensure the entire image is visible */
+//   }
 
-  @media (min-width: 768px) {
-    /* Adjust to larger size on bigger screens */
-    width: 200px;
-  }
+//   h2 {
+//     margin: 10px 0;
+//     font-size: 16px;
+//     font-weight: bold;
+//   }
 
-  img {
-    max-width: 100%;
-    max-height: 100px; /* Limit image height */
-    height: auto;
-    object-fit: contain; /* Ensure the entire image is visible */
-  }
-
-  h2 {
-    margin: 10px 0;
-    font-size: 16px;
-    font-weight: bold;
-  }
-
-  button {
-    background-color: orange;
-    color: white;
-    padding: 5px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    margin: 2px 2px;
-    cursor: pointer;
-  }
-`;
+//   button {
+//     background-color: orange;
+//     color: white;
+//     padding: 5px 10px;
+//     text-align: center;
+//     text-decoration: none;
+//     display: inline-block;
+//     font-size: 14px;
+//     margin: 2px 2px;
+//     cursor: pointer;
+//   }
+// `;
 
 const Container = styled.div`
   display: flex;
@@ -59,20 +58,20 @@ const Container = styled.div`
 
 const MainContent = styled.div`
   flex: 1;
-  background-color: #f2f2f2
+  background-color: #f2f2f2;
 `;
 
 const OrderContainer = styled.div`
   flex: 1;
 `;
 
-const OrderSummary = styled.div`
-  background-color: #f2f2f2;
-`;
+// const OrderSummary = styled.div`
+//   background-color: #f2f2f2;
+// `;
 
-const BagSummary = styled.div`
-  background-color: #f8f8f8;
-`;
+// const BagSummary = styled.div`
+//   background-color: #f8f8f8;
+// `;
 
 const PaymentMethods = styled.div`
   /* Additional styles if needed */
@@ -84,57 +83,57 @@ const PaymentMethodLabel = styled.label`
   background-color: orange;
 `;
 
-function CheckoutPage() {
-  // State for customer details
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [city, setCity] = useState("");
-  const [county, setCounty] = useState("");
-  const [postalCode, setPostalCode] = useState("");
-  const [streetAddress, setStreetAddress] = useState("");
- // State for payment mode
- const [paymentMode, setPaymentMode] = useState("Mpesa");
- const { cart, setCart } = useContext(CartContext);
- const [totalAmount, setTotalAmount] = useState(0);
+const CheckoutPage = () => {
+	const { cartProducts, setCartProducts } = useContext(CartContext);
+  
+	// State for customer details
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
+	const [phoneNumber, setPhoneNumber] = useState("");
+	const [email, setEmail] = useState("");
+	const [city, setCity] = useState("");
+	const [postalCode, setPostalCode] = useState("");
+	const [streetAddress, setStreetAddress] = useState("");
+	const [paymentMode, setPaymentMode] = useState("Mpesa");
 
- // Function to calculate the total amount
- useEffect(() => {
-  const calculateTotalAmount = () => {
-    const total = cart.reduce((total, item) => total + item.unit_price * item.quantity, 0);
-    setTotalAmount(total);
-  };
 
-  calculateTotalAmount();
-}, [cart]);
- // Function to remove an item from the cart
- const removeFromCart = (index) => {
-  const newCart = cart.filter((_, idx) => idx !== index);
-  setCart(newCart);
-};
+	// Function to calculate the total amount
+	const calculateTotalAmount = () => {
+		return cartProducts.reduce(
+		  (total, item) => total + item.unit_price * item.quantity,
+		  0
+		);
+	  };
+  
+	// Function to remove an item from the cart
+	const removeFromCart = (index) => {
+	  const newCart = cartProducts.filter((_, idx) => idx !== index);
+	  setCartProducts(newCart);
+	};
+  
+	// Check if all required fields are filled
+	const isFormComplete =
+	  firstName &&
+	  lastName &&
+	  phoneNumber &&
+	  email &&
+	  city &&
+	  postalCode &&
+	  streetAddress;
+  
+	// Handle checkout
+	const handleCheckout = () => {
+	  if (!isFormComplete) {
+		alert("Please fill all required fields before proceeding.");
+		return;
+	  }
+	  // Clear the cart and navigate to the success page or do payment processing
+	  setCartProducts([]);
+	  alert("Order placed successfully!");
+	};
+  
 
- // Check if all required fields are filled
- const isFormComplete =
-   firstName &&
-   lastName &&
-   phoneNumber &&
-   email &&
-   city &&
-   county &&
-   postalCode &&
-   streetAddress;
-
- const handleCheckout = () => {
-   if (!isFormComplete) {
-     alert("Please fill all required fields before proceeding.");
-     return;
-   }
-   // You can implement payment processing logic here
-   alert("Payment processed!");
- };
   return (
-    
     <Container>
       <MainContent>
         <div style={{ padding: "20px", display: "block" }}>
@@ -191,15 +190,6 @@ function CheckoutPage() {
               />
             </label>
             <label>
-              {/* County:{" "} */}
-              <input
-                type="text"
-                placeholder="Country"
-                value={county}
-                onChange={(e) => setCounty(e.target.value)}
-              />
-            </label>
-            <label>
               {/* Postal Code:{" "} */}
               <input
                 type="text"
@@ -218,7 +208,7 @@ function CheckoutPage() {
               />
             </label>
           </div>
-        
+
           <h1>Payment Method</h1>
           <p>Selected Payment Mode: {paymentMode}</p>
           <PaymentMethods>
@@ -233,33 +223,30 @@ function CheckoutPage() {
             Proceed to Payment
           </button>
         </div>
-        </MainContent>
+      </MainContent>
       <OrderContainer>
-        <OrderSummary>
-          <h2>Order Summary</h2>
-          <p>No. of Items to be Shipped: {cart.length}</p>
-          <p>Total Amount to be Paid: Ksh.{totalAmount.toFixed(2)}</p>
-        </OrderSummary>
-        <BagSummary>
+        <div>
           <h2>Bag Summary</h2>
-          {cart.map((item, index) => (
-            <ProductCard key={item.index}>
-              <img src={item.product_full_image} alt={item.name} />
-              <p>
-                {item.product_name}: Ksh.{item.unit_price.toFixed(2)}  x {item.quantity} = ${(item.unit_price * item.quantity).toFixed(2)}
-              </p>
-              <button onClick={() => removeFromCart(index)}>
-                Remove
-              </button>
-              <div>
-                <h4>Total: Ksh{totalAmount}</h4>
-              </div>
-            </ProductCard>
-          ))}
-        </BagSummary>
+          {cartProducts.length > 0 && (
+            <div>
+              {cartProducts.map((item, index) => (
+                <div key={index}>
+                  <p>
+                    {item.product_name}: Ksh.{item.unit_price.toFixed(2)} x{" "}
+                    {item.quantity} = Ksh.
+                    {(item.unit_price * item.quantity).toFixed(2)}
+                  </p>
+                  <button onClick={() => removeFromCart(index)}>Remove</button>
+                </div>
+              ))}
+              <p>Total Amount: Ksh.{calculateTotalAmount().toFixed(2)}</p>
+              <button onClick={handleCheckout}>Proceed to Payment</button>
+            </div>
+          )}
+        </div>
       </OrderContainer>
-      </Container>
+    </Container>
   );
-}
+};
 
 export default CheckoutPage;
