@@ -12,7 +12,7 @@ const titleStyle = {
 };
 
 const paragraphStyle = {
-  fontSize: '16px',
+  fontSize: '',
   lineHeight: 1.5,
   marginBottom: '10px',
 };
